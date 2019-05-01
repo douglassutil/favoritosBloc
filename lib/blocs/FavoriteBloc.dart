@@ -19,6 +19,23 @@ class FavoriteBloc extends BlocBase {
   Observable<Post> get favoritesListDeleteFlux => _favoritesListDeleteController.stream;
   Sink<Post> get favoritesListDeleteEvent => _favoritesListDeleteController.sink;
 
+  FavoriteBloc(){
+    favoritesListAddFlux.listen(_handleAdd);
+    favoritesListDeleteFlux.listen(_handeDelete);
+  }
+
+  void _handleAdd(Post post){
+    _favorites.posts.add(post);
+  }
+
+  void updateList(){
+    favoritesListEvent.add(_favorites.posts.toList());
+  }
+
+  void _handeDelete(Post post){
+    _favorites.posts.remove(post);
+  }
+
   @override
   void dispose() {
     _favoritesListController.close();

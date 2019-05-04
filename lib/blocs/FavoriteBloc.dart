@@ -26,6 +26,7 @@ class FavoriteBloc extends BlocBase {
 
   void _handleAdd(Post post){
     _favorites.posts.add(post);
+    updateList();
   }
 
   void updateList(){
@@ -34,6 +35,7 @@ class FavoriteBloc extends BlocBase {
 
   void _handeDelete(Post post){
     _favorites.posts.remove(post);
+    updateList();
   }
 
   @override
